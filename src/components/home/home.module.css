@@ -54,7 +54,7 @@
 .question {
   max-width: 16ch;
   margin: 0 auto;
-  font-size: clamp(2.3rem, 5.2vw, 4.6rem);
+  font-size: clamp(2.3rem, min(5.2vw, 8.2vh), 4.6rem);
   line-height: 1.02;
   text-wrap: balance;
   animation: pm-fade-up 1.2s var(--ease-out) both;
@@ -73,7 +73,7 @@
 .stage {
   position: relative;
   width: min(100%, 860px);
-  height: clamp(300px, 46vh, 430px);
+  height: clamp(280px, 43vh, 430px);
   margin: clamp(8px, 2vh, 20px) auto 0;
 }
 
@@ -81,7 +81,7 @@
   position: absolute;
   left: 50%;
   top: 50%;
-  width: clamp(180px, 25vh, 250px);
+  width: clamp(170px, 24vh, 250px);
   aspect-ratio: 1;
   transform: translate(-50%, -52%);
 }

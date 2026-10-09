@@ -5,7 +5,7 @@ import styles from "./home.module.css";
 
 export default function DailyWisdom({ verse, katha }: { verse: GitaVerse; katha: Katha }) {
   return (
-    <section className={`section section--forest ${styles.daily}`} data-tour="daily">
+    <section className={`section section--forest ${styles.daily}`}>
       <div className="container">
         <div className="section-head section-head--center">
           <p className="eyebrow eyebrow--center">Daily wisdom · free, every day</p>
@@ -13,7 +13,7 @@ export default function DailyWisdom({ verse, katha }: { verse: GitaVerse; katha:
           <p className="lead">The same verse and story are read across the world today. Read slowly, then light your lamp.</p>
         </div>
 
-        <div className={styles.dailyGrid}>
+        <div className={styles.dailyGrid} data-tour="daily">
           <article className={styles.verse} data-reveal>
             <p className={styles.dailyKicker}>
               GITA · {verse.chapter}.{verse.verse} · {verse.chapterName}

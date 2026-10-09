@@ -201,7 +201,24 @@ export default function SakhiProvider({ children }: { children: ReactNode }) {
       if (reply.mood === "joy") setTimeout(() => setMood("joy", 1800), 400);
       if (reply.navigate && reply.navigate !== pathname) {
         const href = reply.navigate;
-        setTimeout(() => router.push(href), 900);
+        setTimeout(() => {
+          router.push(href);
+          // When she takes you to a specific place, she flies there and points it out.
+          const hash = href.split("#")[1];
+          if (hash) {
+            let tries = 0;
+            const find = setInterval(() => {
+              const el = document.getElementById(hash);
+              if (el || ++tries > 20) {
+                clearInterval(find);
+                if (el) {
+                  setOpen(false);
+                  runGuideRef.current([{ selector: `#${CSS.escape(hash)}`, text: "Here we are. ✨" }]);
+                }
+              }
+            }, 250);
+          }
+        }, 900);
       }
       if (reply.tour) {
         setTimeout(() => {
@@ -300,7 +317,8 @@ export default function SakhiProvider({ children }: { children: ReactNode }) {
       setSpot({ top, left: r.left - pad, width: r.width + pad * 2, height });
       const cardW = Math.min(340, window.innerWidth - 32);
       const below = top + height + 16;
-      const cardTop = below + 170 < window.innerHeight ? below : Math.max(16, top - 190);
+      const minTop = 84; // keep clear of the fixed header
+      const cardTop = below + 170 < window.innerHeight ? below : top - 190 >= minTop ? top - 190 : Math.min(window.innerHeight - 200, Math.max(minTop, top + 16));
       const cardLeft = Math.min(Math.max(16, r.left + r.width / 2 - cardW / 2), window.innerWidth - cardW - 16);
       setCardPos({ top: cardTop, left: cardLeft });
       // Fly the orb to sit just beside the card.

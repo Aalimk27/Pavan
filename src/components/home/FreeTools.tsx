@@ -68,7 +68,7 @@ export default function FreeTools() {
   };
 
   return (
-    <section className={`section ${styles.tools}`} data-tour="free-tools">
+    <section className={`section ${styles.tools}`}>
       <div className="container">
         <div className="section-head">
           <p className="eyebrow">Free, before anything else</p>
@@ -78,7 +78,7 @@ export default function FreeTools() {
           <p className="lead">Real calculations — not teasers. Try them right here; Sakhi will explain anything you're curious about.</p>
         </div>
 
-        <div className={styles.toolGrid}>
+        <div className={styles.toolGrid} data-tour="free-tools">
           <form className={`card card--gilded ${styles.tool}`} onSubmit={calcBirth} data-reveal>
             <span className="badge badge--free">ANK · Free</span>
             <h3>Your Mulank & Bhagya Ank</h3>

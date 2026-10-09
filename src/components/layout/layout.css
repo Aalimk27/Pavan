@@ -45,7 +45,7 @@
 }
 
 .site-header.is-scrolled {
-  background: rgba(251, 246, 234, 0.82);
+  background: rgba(251, 246, 234, 0.95);
   color: var(--forest-900);
   backdrop-filter: saturate(1.4) blur(14px);
   -webkit-backdrop-filter: saturate(1.4) blur(14px);

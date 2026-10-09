@@ -226,6 +226,26 @@ export function respond(raw: string, ctx: BrainContext): BrainReply {
     return { text: "Let me show you around. Follow my light. ✨", tour: true, navigate: ctx.path === "/" ? undefined : "/" };
   }
 
+  // 4b. Explicit navigation ("take me to…", "open…").
+  const nav: Array<[RegExp, string]> = [
+    [/\bsnapshot\b/, "/drishti#snapshot"],
+    [/\b(tiers|reports?|pricing)\b/, "/drishti#tiers"],
+    [/\bdrishti\b/, "/drishti"],
+    [/\bvastu\b/, "/vastu"],
+    [/\bank\b|numbers?\b/, "/ank"],
+    [/\bkatha\b/, "/katha"],
+    [/\bgita\b/, "/gita"],
+    [/\bgurukul\b/, "/gurukul"],
+    [/\bmembership\b/, "/membership"],
+    [/\b(advisory|realtor|radheyshyam)\b/, "/advisory"],
+    [/\b(meet sakhi|sakhi page|brand kit)\b/, "/sakhi"],
+    [/\bmy prem marg|my account|my profile|dashboard\b/, "/my"],
+    [/\b(about|philosophy|founder|mission)\b/, "/about"],
+    [/\bhome ?page|start\b/, "/"],
+  ];
+  if (has(t, /\b(go to|take me|open|navigate)\b/)) {
+    for (const [re, href] of nav) if (re.test(t)) return { text: "Taking you there now. ✨", navigate: href };
+  }
   // 5. Policies (non-negotiables, blueprint §3).
   if (has(t, /\b(gem|gemstone|stone|ruby|emerald|sapphire|neelam|pukhraj|ratna|crystal)\b/)) {
     return {
@@ -243,6 +263,13 @@ export function respond(raw: string, ctx: BrainContext): BrainReply {
     return {
       text: "I don't sell lucky numbers — no number is absolutely good or bad. Your Mulank and Bhagya Ank describe tendencies you can work with. Tell me your date of birth and I'll calculate both.",
       chips: ["My birthday is 14 March 1990"],
+    };
+  }
+  if (has(t, /\b(remed(y|ies)|upay|upaya|what should i do to improve|how (can|do) i improve)\b/)) {
+    return {
+      text: "Prem Marg's remedies begin with you, not with things to buy: discipline, clean speech, service, gratitude and prayer — and acting with your timing rather than against it. For a home, we go behaviour first, then layout, then colour or material, and renovation only last, with an architect. A DRISHTI reading gives remedies specific to your chart, always positive and never fear-based.",
+      cards: [routeCard("drishti")],
+      chips: ["Today's Gita verse", "Look at my home's Vastu"],
     };
   }
   if (has(t, /\b(manglik|mangal dosh|kaal ?sarp|sade ?sati|pitra dosh|dosha|curse|black magic|evil eye|nazar|bad luck|unlucky)\b/)) {
@@ -383,17 +410,17 @@ export function respond(raw: string, ctx: BrainContext): BrainReply {
   }
 
   // 13. Commerce, membership, advisory.
+  if (has(t, /\b(property|real estate|realtor|(buy|buying|purchase|purchasing|sell|selling) (a |an |my )?(new )?(house|home|flat|plot|land|apartment|villa|property)|invest in (land|property)|rent(ing)?|advisor|advisory|consultation|talk to (a )?(human|person|someone)|human)\b/)) {
+    return {
+      text: "For property decisions and personal consultations, a real person should be beside you. RadheyShyam Realtor offers Private Advisory — your request goes straight to them, privately.",
+      cards: [{ kind: "advisory" }],
+    };
+  }
   if (has(t, /\b(price|prices|pricing|cost|how much|fee|charges|paid|buy|purchase|report)\b/)) return productsReply();
   if (has(t, /\b(member|membership|subscribe|subscription|copper|gold plan|platinum)\b/)) {
     return {
       text: "Membership keeps Prem Marg with you every day — Copper, Gold and Platinum. Final prices are being set carefully after launch so they're fair; you can join the early list now.",
       cards: [{ kind: "links", links: [{ label: "See membership", href: "/membership" }] }],
-    };
-  }
-  if (has(t, /\b(property|real estate|realtor|buy (a )?(house|home|flat|plot)|invest in (land|property)|rent(ing)?|advisor|advisory|consultation|talk to (a )?(human|person|someone)|human)\b/)) {
-    return {
-      text: "For property decisions and personal consultations, a real person should be beside you. RadheyShyam Realtor offers Private Advisory — your request goes straight to them, privately.",
-      cards: [{ kind: "advisory" }],
     };
   }
   if (has(t, /\b(order|my report|payment|refund|receipt|invoice)\b/)) {
@@ -403,22 +430,6 @@ export function respond(raw: string, ctx: BrainContext): BrainReply {
     };
   }
 
-  // 14. Navigation.
-  const nav: Array<[RegExp, string]> = [
-    [/\bdrishti\b/, "/drishti"],
-    [/\bvastu\b/, "/vastu"],
-    [/\bank\b|numbers?\b/, "/ank"],
-    [/\bkatha\b/, "/katha"],
-    [/\bgita\b/, "/gita"],
-    [/\bgurukul\b/, "/gurukul"],
-    [/\bmembership\b/, "/membership"],
-    [/\bmy prem marg|my account|my profile|dashboard\b/, "/my"],
-    [/\b(about|philosophy|founder|mission)\b/, "/about"],
-    [/\bhome ?page|start\b/, "/"],
-  ];
-  if (has(t, /\b(go to|take me|open|show me|navigate)\b/)) {
-    for (const [re, href] of nav) if (re.test(t)) return { text: "Taking you there now. ✨", navigate: href };
-  }
   if (has(t, /\b(prem marg|about (this|the) (site|platform)|who (made|built|runs)|founder)\b/)) {
     return {
       text: `Prem Marg means “the path of love”. It's a global dharmic guidance platform by ${SITE.founderBrand}: astrology, Vastu and numerology are entry doors; Katha, Gita and Gurukul are the home you grow in. Our promise is guidance without fear.`,

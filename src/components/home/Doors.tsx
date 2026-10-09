@@ -38,7 +38,7 @@ export default function Doors() {
   const understand = PILLARS.slice(0, 3);
   const live = PILLARS.slice(3);
   return (
-    <section className={`section section--marble ${styles.doors}`} data-tour="pillars">
+    <section className={`section section--marble ${styles.doors}`}>
       <div className="container">
         <div className="section-head section-head--center">
           <p className="eyebrow eyebrow--center">Six doors · one path</p>
@@ -47,7 +47,7 @@ export default function Doors() {
           </h2>
         </div>
         <p className={styles.doorGroup}>Understand yourself, your space and your numbers</p>
-        <div className={styles.doorRow}>
+        <div className={styles.doorRow} data-tour="pillars">
           {understand.map((p, i) => (
             <Door key={p.key} p={p} i={i} />
           ))}

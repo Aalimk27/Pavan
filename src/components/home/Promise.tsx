@@ -15,7 +15,7 @@ const VOWS = [
 
 export function Vows() {
   return (
-    <section className={`section ${styles.vows}`} data-tour="promise">
+    <section className={`section ${styles.vows}`}>
       <div className="container">
         <div className={styles.vowsHead}>
           <p className="eyebrow">Our promise</p>
@@ -24,7 +24,7 @@ export function Vows() {
           </h2>
           <p className="lead">These aren't marketing lines. They are the rules our people, our Sakhi and our software follow — every day, on every page.</p>
         </div>
-        <ol className={styles.vowList}>
+        <ol className={styles.vowList} data-tour="promise">
           {VOWS.map((x, i) => (
             <li key={x.v} data-reveal style={{ ["--reveal-delay" as string]: `${i * 60}ms` }}>
               <span className={styles.vowNum}>{["१", "२", "३", "४", "५", "६"][i]}</span>
