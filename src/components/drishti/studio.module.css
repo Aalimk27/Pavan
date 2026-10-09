@@ -1,0 +1,419 @@
+/* ─────────────── Snapshot studio: intro + form ─────────────── */
+
+.studio {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: clamp(32px, 5vw, 80px);
+  align-items: start;
+}
+
+@media (max-width: 960px) {
+  .studio {
+    grid-template-columns: 1fr;
+  }
+}
+
+.intro {
+  position: sticky;
+  top: calc(var(--header-h) + 32px);
+}
+
+@media (max-width: 960px) {
+  .intro {
+    position: static;
+  }
+}
+
+.form {
+  display: grid;
+  gap: 22px;
+  padding: clamp(22px, 3.4vw, 40px);
+  box-shadow: var(--shadow-lift);
+}
+
+.formHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.formKicker {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 2vw, 1.6rem);
+  line-height: 1.1;
+}
+
+.optional {
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--ink-mute);
+}
+
+.fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.fieldset legend {
+  padding: 0;
+  margin-bottom: 8px;
+}
+
+.dateRow {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.8fr) minmax(0, 1.2fr);
+  gap: 10px;
+}
+
+.sub {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+}
+
+.subLabel {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+
+.timeBlock {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: start;
+}
+
+@media (max-width: 520px) {
+  .timeBlock {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
+.timeBlock .hint {
+  margin: 0;
+}
+
+.timeBlock input[type="time"]:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* toggle switch built on a real checkbox */
+.toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 27px;
+  min-height: 50px;
+  padding: 8px 16px 8px 12px;
+  border-radius: 14px;
+  border: 1.5px dashed var(--line-gold);
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: background 0.25s, border-color 0.25s, color 0.25s;
+  user-select: none;
+}
+
+@media (max-width: 520px) {
+  .toggle {
+    margin-top: 0;
+  }
+}
+
+.toggle:hover {
+  border-color: var(--gold-500);
+  background: rgba(212, 165, 55, 0.06);
+}
+
+.toggle input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.toggle:has(input:focus-visible) {
+  outline: 2px solid var(--gold-500);
+  outline-offset: 3px;
+}
+
+.switch {
+  position: relative;
+  flex: none;
+  width: 38px;
+  height: 22px;
+  border-radius: 999px;
+  background: rgba(16, 34, 26, 0.16);
+  transition: background 0.3s var(--ease-out);
+}
+
+.switch::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  transition: transform 0.35s var(--ease-out);
+}
+
+.toggleOn {
+  border-style: solid;
+  border-color: rgba(15, 77, 51, 0.4);
+  background: rgba(34, 128, 90, 0.08);
+  color: var(--forest-700);
+}
+
+.toggleOn .switch {
+  background: var(--forest-600);
+}
+
+.toggleOn .switch::after {
+  transform: translateX(16px);
+}
+
+.softNote {
+  margin: -6px 0 0;
+  animation: pm-fade-up 0.5s var(--ease-out) both;
+}
+
+/* combobox */
+.combo {
+  position: relative;
+}
+
+.comboField {
+  position: relative;
+}
+
+.comboField :global(.input) {
+  padding-left: 44px;
+  padding-right: 40px;
+}
+
+.comboIcon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  transform: translateY(-50%);
+  color: var(--gold-600);
+  pointer-events: none;
+}
+
+.comboChosen :global(.input) {
+  border-color: rgba(34, 128, 90, 0.55);
+  background: linear-gradient(90deg, rgba(34, 128, 90, 0.06), transparent 60%), var(--ivory-50);
+}
+
+.comboCheck {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--forest-600);
+  color: var(--ivory-50);
+  font-size: 0.75rem;
+  font-weight: 800;
+  animation: pm-fade-up 0.35s var(--ease-out) both;
+}
+
+.comboList {
+  position: absolute;
+  z-index: 20;
+  left: 0;
+  right: 0;
+  top: calc(100% + 6px);
+  max-height: 320px;
+  overflow-y: auto;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  background: var(--ivory-50);
+  border: 1px solid var(--line-gold);
+  border-radius: 16px;
+  box-shadow: var(--shadow-lift);
+  animation: pm-fade-up 0.25s var(--ease-out) both;
+}
+
+.comboList[hidden] {
+  display: none;
+}
+
+.comboOption {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas: "name coord" "region coord";
+  column-gap: 12px;
+  padding: 9px 12px;
+  border-radius: 11px;
+  cursor: pointer;
+}
+
+.comboActive {
+  background: linear-gradient(90deg, rgba(212, 165, 55, 0.18), rgba(212, 165, 55, 0.06));
+}
+
+.comboName {
+  grid-area: name;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.comboRegion {
+  grid-area: region;
+  font-size: 0.84rem;
+  color: var(--ink-mute);
+}
+
+.comboCoord {
+  grid-area: coord;
+  align-self: center;
+  font-family: var(--font-inscription);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--gold-700);
+  white-space: nowrap;
+}
+
+@media (max-width: 440px) {
+  .comboCoord {
+    display: none;
+  }
+}
+
+.textBtn {
+  justify-self: start;
+  margin-top: 4px;
+  padding: 4px 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--forest-700);
+  text-decoration: underline;
+  text-decoration-color: var(--line-gold);
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+
+.textBtn:hover {
+  text-decoration-color: var(--gold-500);
+}
+
+.manual {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 16px;
+  background: rgba(244, 236, 217, 0.6);
+  border: 1px solid var(--line);
+  animation: pm-fade-up 0.4s var(--ease-out) both;
+}
+
+.coordRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.coordRow .hint {
+  font-size: 0.75rem;
+}
+
+/* resolved offset */
+.resolved {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.resolvedChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 16px 9px 12px;
+  border-radius: 999px;
+  background: var(--forest-900);
+  color: var(--ivory-100);
+  font-size: 0.9rem;
+  line-height: 1.35;
+  animation: pm-fade-up 0.4s var(--ease-out) both;
+}
+
+.resolvedChip svg {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  color: var(--gold-400);
+}
+
+.resolvedChip strong {
+  color: var(--gold-300);
+}
+
+.historic {
+  color: rgba(251, 246, 234, 0.7);
+}
+
+.resolvedHint {
+  font-size: 0.85rem;
+  color: var(--ink-mute);
+}
+
+.submit {
+  width: 100%;
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid rgba(6, 42, 28, 0.25);
+  border-top-color: var(--forest-900);
+  animation: pm-spin 0.8s linear infinite;
+}
+
+.privacy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: -6px 0 0;
+  font-size: 0.82rem;
+  color: var(--ink-mute);
+  text-align: center;
+}
+
+.privacy svg {
+  flex: none;
+  width: 15px;
+  height: 15px;
+  color: var(--gold-600);
+}
