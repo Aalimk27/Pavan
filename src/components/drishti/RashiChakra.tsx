@@ -99,7 +99,7 @@ export default function RashiChakra({ id, label, moon, sun, lagna, rotating = fa
       kicker: `Rashi ${focus.i + 1} of 12`,
       title: r.name,
       deva: RASHI_DEVANAGARI[focus.i],
-      lines: [`${r.english} · ${r.element}`, `Lord · ${r.lord} (${GRAHA_SANSKRIT[r.lord]})`],
+      lines: [`${r.english} · ${r.element}`, `Lord · ${r.lord}${GRAHA_SANSKRIT[r.lord] !== r.lord ? ` (${GRAHA_SANSKRIT[r.lord]})` : ""}`],
     };
   } else if (focus?.ring === "nak") {
     const n = NAKSHATRAS[focus.i];

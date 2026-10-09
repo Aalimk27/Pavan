@@ -508,7 +508,7 @@ export default function PlanStage(props: PlanStageProps) {
               return <line key={a} x1={p1.x} y1={p1.y} x2={p2.x} y2={p2.y} className={long ? s.tickLong : s.tick} style={{ strokeWidth: (long ? 2 : 1) * k }} />;
             })}
             {(["N", "E", "S", "W"] as const).map((d, i) => {
-              const p = polar(dialCentre, dialR - 32 * k, north + i * 90);
+              const p = polar(dialCentre, dialR + 15 * k, north + i * 90);
               return (
                 <text key={d} x={p.x} y={p.y} dy="0.36em" textAnchor="middle" className={d === "N" ? s.dialN : s.dialLetter} style={{ fontSize: (d === "N" ? 19 : 14) * k }}>
                   {d}

@@ -9,6 +9,7 @@ import { track } from "@/lib/analytics";
 import PlanStage, { type StageMode, type StagePlan } from "./PlanStage";
 import FindingsPanel from "./FindingsPanel";
 import { DIR16_NAME, ROOM_ASK, ROOM_CODE, ROOM_ORDER, SAMPLE, SEVERITY_META, detectOuterWalls, insetRect, loadImage, roomNames, topFaces } from "./studio-data";
+import { SAMPLE_EVENT } from "./studio-events";
 import s from "./studio.module.css";
 
 type Step = 0 | 1 | 2 | 3 | 4;
@@ -23,7 +24,6 @@ const STEPS = [
 ] as const;
 
 const MAX_BYTES = 20 * 1024 * 1024;
-export const SAMPLE_EVENT = "pm:vastu-sample";
 
 const uid = () => Math.random().toString(36).slice(2, 9);
 const zoneList = (zs: string[]) => (zs.length <= 1 ? zs.join("") : `${zs.slice(0, -1).join(", ")} or ${zs[zs.length - 1]}`);
@@ -352,7 +352,7 @@ export default function VastuStudio() {
 
       <div className={s.layout}>
         {/* Stage */}
-        <div className={s.stageCol}>
+        <div className={`${s.stageCol} ${plan ? "" : s.stageColEmpty}`}>
           {plan && (
             <div className={s.toolbar}>
               <span className={s.planName} title={plan.name}>
@@ -415,7 +415,7 @@ export default function VastuStudio() {
                 <strong>{names[focused.id] ?? focused.subject}</strong>
                 <span className={s.calloutZone}>
                   {ZONE_INFO[focused.zone].name}
-                  {focused.zone16 ? ` · ${focused.zone16}` : ""}
+                  {focused.zone16 && focused.zone16 !== focused.zone ? ` · ${focused.zone16}` : ""}
                 </span>
                 <button
                   type="button"
@@ -436,7 +436,7 @@ export default function VastuStudio() {
         </div>
 
         {/* Panel */}
-        <div className={s.panel} id="vastu-panel">
+        <div className={s.panel} id="vastu-panel" data-scroll>
           <input ref={fileRef} type="file" accept="image/png,image/jpeg,.png,.jpg,.jpeg,application/pdf,.pdf" className="visually-hidden" onChange={onFile} tabIndex={-1} aria-hidden />
 
           {step === 0 && (

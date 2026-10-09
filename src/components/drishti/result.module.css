@@ -448,6 +448,18 @@
   color: rgba(251, 246, 234, 0.82);
 }
 
+@media (max-width: 520px) {
+  .ank {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .ankDigit {
+    width: 52px;
+    height: 52px;
+    font-size: 1.7rem;
+  }
+}
+
 .ankLink {
   margin-top: 16px;
   color: var(--gold-300);

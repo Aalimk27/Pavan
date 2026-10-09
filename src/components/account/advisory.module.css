@@ -1,0 +1,152 @@
+.form {
+  display: grid;
+  gap: 20px;
+}
+
+.topics {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.topicGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+@media (max-width: 480px) {
+  .topicGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.topic {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  border: 1.5px solid var(--line);
+  background: var(--ivory-50);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+
+.topic:hover {
+  border-color: var(--line-gold);
+}
+
+.topic input {
+  accent-color: var(--forest-700);
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  flex: none;
+}
+
+.topic:has(input:focus-visible) {
+  outline: 2px solid var(--gold-500);
+  outline-offset: 2px;
+}
+
+.topicOn {
+  border-color: var(--gold-500);
+  background: linear-gradient(135deg, rgba(251, 236, 192, 0.55), rgba(255, 253, 247, 0.9));
+  box-shadow: 0 6px 18px -10px rgba(138, 100, 32, 0.6);
+}
+
+.two {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+@media (max-width: 560px) {
+  .two {
+    grid-template-columns: 1fr;
+  }
+}
+
+.optional {
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--ink-mute);
+}
+
+.honey {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.submitRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+}
+
+@media (max-width: 480px) {
+  .submitRow :global(.btn) {
+    width: 100%;
+    white-space: normal;
+  }
+}
+
+.done {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: 6px;
+  padding: 18px 6px;
+  animation: pm-fade-up 0.7s var(--ease-out) both;
+}
+
+.done p {
+  max-width: 46ch;
+  color: var(--ink-soft);
+}
+
+.doneSeal {
+  display: grid;
+  place-items: center;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  font-family: var(--font-sanskrit);
+  font-size: 2.1rem;
+  color: var(--forest-900);
+  background: var(--grad-gold);
+  box-shadow: var(--shadow-glow);
+  margin-bottom: 10px;
+  animation: pm-breathe 4s var(--ease-in-out) infinite;
+}
+
+.doneTitle {
+  margin: 0;
+}
+
+.ref {
+  margin: 4px 0 6px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1px dashed var(--gold-500);
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+}
+
+.ref strong {
+  font-family: var(--font-inscription);
+  letter-spacing: 0.16em;
+  color: var(--forest-800);
+}

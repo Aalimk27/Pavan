@@ -1,0 +1,272 @@
+/* ─────────── Pricing rule ─────────── */
+
+.rule {
+  overflow: hidden;
+}
+
+.rule::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(600px 300px at 50% 0%, rgba(243, 207, 99, 0.14), transparent 70%),
+    repeating-conic-gradient(from 0deg at 50% 120%, rgba(236, 196, 97, 0.05) 0 3deg, transparent 3deg 12deg);
+  pointer-events: none;
+}
+
+.ruleInner {
+  position: relative;
+  text-align: center;
+  max-width: 1080px;
+}
+
+.ruleTitle {
+  max-width: 18ch;
+  margin: 0 auto clamp(36px, 5vw, 56px);
+}
+
+.ruleTitle em {
+  font-style: italic;
+  color: var(--gold-300);
+}
+
+.ruleGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: clamp(16px, 2vw, 28px);
+  text-align: left;
+}
+
+.ruleItem {
+  position: relative;
+  padding: 26px 24px 22px;
+  border-radius: 22px;
+  border: 1px solid rgba(236, 196, 97, 0.22);
+  background: linear-gradient(160deg, rgba(255, 253, 247, 0.06), rgba(255, 253, 247, 0.015));
+  transition: border-color 0.3s, transform 0.4s var(--ease-out);
+}
+
+.ruleItem:hover {
+  border-color: rgba(236, 196, 97, 0.5);
+  transform: translateY(-3px);
+}
+
+.ruleItem h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.4em;
+}
+
+.ruleItem p {
+  margin: 0;
+  color: rgba(251, 246, 234, 0.74);
+  font-size: 0.97rem;
+}
+
+.ruleNum {
+  display: block;
+  font-family: var(--font-sanskrit);
+  font-size: 2.4rem;
+  line-height: 1;
+  margin-bottom: 12px;
+  background: var(--grad-gold);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ─────────── Comparison table ─────────── */
+
+.tableWrap {
+  overflow-x: auto;
+  border-radius: var(--radius-l);
+  border: 1px solid var(--line);
+  background: var(--ivory-50);
+  box-shadow: var(--shadow-soft);
+  margin-bottom: 14px;
+}
+
+.table {
+  width: 100%;
+  min-width: 560px;
+  border-collapse: collapse;
+  font-size: 0.97rem;
+}
+
+.table th,
+.table td {
+  padding: 15px 18px;
+  border-bottom: 1px solid var(--line);
+  text-align: center;
+}
+
+.table thead th {
+  position: sticky;
+  top: 0;
+  background: var(--ivory-200);
+  font-family: var(--font-inscription);
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  font-size: 0.82rem;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.table thead th:first-child {
+  text-align: left;
+  color: var(--ink-mute);
+}
+
+.table tbody th {
+  text-align: left;
+  font-weight: 500;
+  color: var(--ink-soft);
+}
+
+.table tbody tr {
+  transition: background 0.2s;
+}
+
+.table tbody tr:hover {
+  background: rgba(212, 165, 55, 0.06);
+}
+
+.thMetal {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  margin-right: 8px;
+  vertical-align: -2px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7), 0 0 0 1px rgba(0, 0, 0, 0.12);
+}
+
+.yes {
+  color: var(--gold-600);
+  font-size: 1.05rem;
+}
+
+.no {
+  color: var(--ink-mute);
+  opacity: 0.6;
+}
+
+.priceRow th,
+.priceRow td {
+  border-bottom: 0;
+  font-weight: 700;
+  color: var(--forest-800);
+  background: rgba(34, 128, 90, 0.05);
+}
+
+/* ─────────── Founding list & FAQ ─────────── */
+
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: clamp(40px, 6vw, 96px);
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .split {
+    grid-template-columns: 1fr;
+  }
+}
+
+.founding {
+  display: grid;
+  gap: 4px;
+}
+
+.founding > :global(.sakhi-note) {
+  margin-top: 22px;
+}
+
+.formCard {
+  margin-top: 10px;
+}
+
+.faqTitle {
+  margin-bottom: 0.6em;
+}
+
+.faqItem {
+  border-bottom: 1px solid var(--line-gold);
+}
+
+.faqItem summary {
+  position: relative;
+  list-style: none;
+  cursor: pointer;
+  padding: 18px 40px 18px 0;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  line-height: 1.35;
+  transition: color 0.2s;
+}
+
+.faqItem summary::-webkit-details-marker {
+  display: none;
+}
+
+.faqItem summary::after {
+  content: "+";
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--line-gold);
+  color: var(--gold-600);
+  font-family: var(--font-body);
+  transition: transform 0.35s var(--ease-out), background 0.2s;
+}
+
+.faqItem[open] summary::after {
+  transform: translateY(-50%) rotate(45deg);
+  background: rgba(212, 165, 55, 0.12);
+}
+
+.faqItem summary:hover {
+  color: var(--forest-700);
+}
+
+.faqItem p {
+  margin: 0 0 20px;
+  color: var(--ink-soft);
+  animation: pm-fade-up 0.45s var(--ease-out) both;
+}
+
+.faqMore {
+  margin-top: 20px;
+}
+
+@media (max-width: 600px) {
+  .table {
+    min-width: 0;
+    font-size: 0.88rem;
+  }
+  .table th,
+  .table td {
+    padding: 12px 8px;
+  }
+  .table tbody th {
+    padding-left: 14px;
+  }
+  .table thead th {
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    white-space: normal;
+  }
+  .table thead th:first-child {
+    padding-left: 14px;
+  }
+  .thMetal {
+    display: block;
+    margin: 0 auto 6px;
+  }
+}

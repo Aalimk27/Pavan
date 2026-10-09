@@ -306,7 +306,7 @@ export default function DrishtiPage() {
           </div>
 
           <div className={s.closing} data-reveal>
-            <SakhiNote tone="dark" ask="What is DRISHTI Core?" askLabel="Ask me about the readings">
+            <SakhiNote ask="What is DRISHTI Core?" askLabel="Ask me about the readings">
               I&rsquo;ll never ask you to fear your chart. Whatever it shows, it&rsquo;s a map for living well — and the choices are always yours.
             </SakhiNote>
             <a href="#snapshot" className="btn btn--lg">

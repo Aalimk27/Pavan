@@ -117,7 +117,7 @@ export default function SnapshotStudio({ intro }: { intro: ReactNode }) {
     try {
       const { offsetMinutes } = localToUtc({ year: y, month: m, day: d, hour, minute }, resolvedPlace.tz);
       const today = zoneOffsetMinutes(resolvedPlace.tz, Date.now());
-      return { label: resolvedPlace.label.split(",")[0], offset: offsetMinutes, differs: today !== offsetMinutes, today, tz: resolvedPlace.tz };
+      return { label: resolvedPlace.source === "manual" ? resolvedPlace.label : resolvedPlace.label.split(",")[0], offset: offsetMinutes, differs: today !== offsetMinutes, today, tz: resolvedPlace.tz };
     } catch {
       return null;
     }

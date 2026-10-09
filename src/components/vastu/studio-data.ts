@@ -248,7 +248,7 @@ export const SAMPLE = {
     { type: "bedroom", at: { x: 195, y: 360 } },
     { type: "toilet", at: { x: 845, y: 470 } },
     { type: "toilet", at: { x: 430, y: 640 } },
-    { type: "stairs", at: { x: 560, y: 630 } },
+    { type: "stairs", at: { x: 610, y: 600 } },
   ] as Array<{ type: RoomType; at: Pt }>,
 };
 

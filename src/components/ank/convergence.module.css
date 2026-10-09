@@ -1,0 +1,434 @@
+/* ═══════════════ Convergence — three gold coins ═══════════════ */
+
+.section {
+  position: relative;
+  overflow: hidden;
+}
+
+.glow {
+  position: absolute;
+  left: 50%;
+  top: 22%;
+  width: min(900px, 120vw);
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(243, 207, 99, 0.14), transparent 62%);
+  pointer-events: none;
+}
+
+.section :global(.container) {
+  position: relative;
+}
+
+.coins {
+  display: flex;
+  justify-content: center;
+  gap: clamp(18px, 6vw, 72px);
+  margin: 8px 0 clamp(36px, 5vw, 56px);
+  padding: 0;
+  list-style: none;
+}
+
+.coinItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: clamp(96px, 22vw, 180px);
+  animation: pm-fade-up 0.8s var(--ease-out) both;
+  animation-delay: var(--d, 0ms);
+}
+
+.coin,
+.coinEmpty {
+  position: relative;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  width: clamp(84px, 18vw, 148px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+}
+
+.coin {
+  background: var(--grad-gold);
+  color: var(--forest-900);
+  box-shadow:
+    inset 0 2px 6px rgba(255, 255, 255, 0.6),
+    inset 0 -8px 14px rgba(138, 100, 32, 0.45),
+    0 0 0 6px rgba(236, 196, 97, 0.1),
+    0 20px 50px -12px rgba(243, 207, 99, 0.6);
+  cursor: default;
+  animation: ank-coin-land 0.9s var(--ease-out) both;
+  transition: transform 0.4s var(--ease-out);
+}
+
+.coin:hover,
+.coin:focus-visible {
+  transform: translateY(-4px) rotate(-4deg);
+}
+
+.coin:focus-visible {
+  outline: 2px solid var(--ivory-100);
+  outline-offset: 6px;
+  border-radius: 50%;
+}
+
+.coin::before {
+  content: "";
+  position: absolute;
+  inset: 8%;
+  border-radius: 50%;
+  border: 1px solid rgba(138, 100, 32, 0.45);
+}
+
+@keyframes ank-coin-land {
+  from {
+    opacity: 0;
+    transform: translateY(-24px) scale(0.7) rotateY(80deg);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.coinNum {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 6vw, 3.8rem);
+  line-height: 1;
+  font-variation-settings: "SOFT" 100, "opsz" 144;
+}
+
+.coinGraha {
+  font-family: var(--font-inscription);
+  font-size: clamp(0.52rem, 1.4vw, 0.68rem);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+.coinEmpty {
+  border: 1.5px dashed rgba(236, 196, 97, 0.45);
+  background: rgba(255, 253, 247, 0.03);
+  color: rgba(236, 196, 97, 0.65);
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  cursor: pointer;
+  transition: background 0.3s, border-color 0.3s, transform 0.4s var(--ease-out);
+}
+
+.coinEmpty:hover {
+  background: rgba(236, 196, 97, 0.08);
+  border-color: var(--gold-400);
+  transform: scale(1.04);
+}
+
+.coinEmpty:focus-visible {
+  outline: 2px solid var(--ivory-100);
+  outline-offset: 6px;
+  border-radius: 50%;
+}
+
+.coinLabel {
+  margin: 14px 0 2px;
+  font-family: var(--font-inscription);
+  font-size: clamp(0.66rem, 1.6vw, 0.8rem);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-300);
+}
+
+.coinSub {
+  margin: 0;
+  font-size: clamp(0.74rem, 1.7vw, 0.88rem);
+  line-height: 1.45;
+  color: rgba(251, 246, 234, 0.72);
+}
+
+.coinSub em {
+  font-family: var(--font-display);
+  color: var(--ivory-100);
+  font-size: 1.08em;
+}
+
+.coinFind {
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--ivory-100);
+  cursor: pointer;
+  padding: 4px 6px;
+  opacity: 0.8;
+}
+
+.coinFind:hover {
+  opacity: 1;
+  color: var(--gold-300);
+}
+
+.waiting {
+  margin: 0 auto;
+  max-width: 40ch;
+  text-align: center;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: rgba(251, 246, 234, 0.7);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: clamp(18px, 2.4vw, 32px);
+  align-items: start;
+  animation: pm-fade-up 0.9s var(--ease-out) both;
+}
+
+/* ── Observation ── */
+
+.observation {
+  padding: clamp(24px, 3vw, 36px);
+  border-radius: var(--radius-l);
+  background: rgba(255, 253, 247, 0.04);
+  border: 1px solid rgba(236, 196, 97, 0.22);
+  backdrop-filter: blur(4px);
+}
+
+.obsHead {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.obsKicker {
+  margin: 0;
+  font-family: var(--font-inscription);
+  font-size: 0.74rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-400);
+}
+
+.obsTitle {
+  margin: 0;
+  font-size: clamp(1.35rem, 2.2vw, 1.7rem);
+}
+
+.obsBody p {
+  margin: 0 0 14px;
+  font-size: 1.02rem;
+  color: rgba(251, 246, 234, 0.88);
+}
+
+.obsFine {
+  margin: 18px 0 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(236, 196, 97, 0.18);
+  font-size: 0.84rem;
+  color: rgba(251, 246, 234, 0.62);
+}
+
+/* ── Offer (ivory card on the forest) ── */
+
+.offer {
+  padding: clamp(24px, 3vw, 36px);
+  border-radius: var(--radius-l);
+  background:
+    linear-gradient(var(--ivory-50), var(--ivory-50)) padding-box,
+    var(--grad-gold) border-box;
+  border: 1.5px solid transparent;
+  color: var(--ink);
+  box-shadow: 0 30px 70px -30px rgba(0, 0, 0, 0.6);
+}
+
+.offerKicker {
+  margin: 0;
+  font-family: var(--font-inscription);
+  font-size: 0.74rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-600);
+}
+
+.offerName {
+  margin: 4px 0 6px;
+  font-size: clamp(1.6rem, 2.6vw, 2rem);
+  color: var(--forest-900);
+}
+
+.offerSummary {
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+.offerIncludes {
+  margin: 18px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.offerIncludes li {
+  position: relative;
+  padding: 7px 0 7px 26px;
+  border-top: 1px solid var(--line);
+  font-size: 0.95rem;
+}
+
+.offerIncludes li::before {
+  content: "✦";
+  position: absolute;
+  left: 2px;
+  top: 7px;
+  color: var(--gold-500);
+  font-size: 0.8rem;
+}
+
+.offerFoot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.offerPrice {
+  margin: 0;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.2rem;
+  color: var(--forest-800);
+}
+
+.fallback {
+  margin-top: 22px;
+  padding-top: 20px;
+  border-top: 1px dashed var(--line-gold);
+  animation: pm-fade-up 0.6s var(--ease-out) both;
+}
+
+.fallbackTitle {
+  margin: 0 0 8px;
+  font-size: 1.15rem;
+  line-height: 1.35;
+  color: var(--forest-900);
+}
+
+.fallbackTitle:focus {
+  outline: none;
+}
+
+.fallbackMsg {
+  margin: 0 0 10px;
+  font-size: 0.88rem;
+  color: var(--ink-mute);
+}
+
+.fallbackForm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.fallbackForm > :global(.field) {
+  align-self: stretch;
+}
+
+.fallbackDone {
+  margin: 0;
+  font-weight: 700;
+  color: var(--forest-700);
+}
+
+/* ── Vastu next step ── */
+
+.vastu {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 32px;
+  margin-top: clamp(28px, 4vw, 44px);
+  padding: 22px 26px;
+  border-radius: var(--radius-m);
+  border: 1px solid rgba(43, 179, 168, 0.35);
+  background: linear-gradient(120deg, rgba(14, 124, 134, 0.18), rgba(10, 77, 104, 0.08));
+}
+
+.vastu > div {
+  flex: 1 1 420px;
+}
+
+.vastuKicker {
+  margin: 0;
+  font-family: var(--font-inscription);
+  font-size: 0.74rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--peacock-400);
+}
+
+.vastuKicker :global(.badge) {
+  margin-left: 6px;
+  color: #bff0ea;
+  background: rgba(43, 179, 168, 0.18);
+}
+
+.vastuTitle {
+  margin: 4px 0 4px;
+  font-size: clamp(1.2rem, 2vw, 1.45rem);
+}
+
+.vastuText {
+  margin: 0;
+  font-size: 0.95rem;
+  color: rgba(251, 246, 234, 0.75);
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .coin,
+  .coinItem,
+  .grid,
+  .fallback {
+    animation: none;
+  }
+}
+
+.askBtn {
+  border: 0;
+  background: none;
+  padding: 0;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* The offer is an ivory card inside a forest section — restore light-surface form styles. */
+.offer .fallbackForm :global(.field) > label {
+  color: var(--ink-soft);
+}
+
+.offer .fallbackForm :global(.input) {
+  background: var(--ivory-50);
+  color: var(--ink);
+  border-color: var(--line);
+}
+
+.offer :global(.checkbox) {
+  color: var(--ink-soft);
+}
+
+.nowrap {
+  white-space: nowrap;
+}

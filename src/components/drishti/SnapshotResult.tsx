@@ -16,7 +16,7 @@ import { RASHI_DEVANAGARI, fmtDate } from "./wheel";
 import { dateLabel, hhmm, isoDate, toCardData, type SnapshotRun } from "./snapshot";
 import styles from "./result.module.css";
 
-const grahaName = (g: Graha) => `${g} (${GRAHA_SANSKRIT[g]})`;
+const grahaName = (g: Graha) => (GRAHA_SANSKRIT[g] === g ? g : `${g} (${GRAHA_SANSKRIT[g]})`);
 
 function pct(start: Date, end: Date, now: Date) {
   return Math.min(100, Math.max(0, ((now.getTime() - start.getTime()) / (end.getTime() - start.getTime())) * 100));
@@ -134,7 +134,11 @@ export default function SnapshotResult({ run, onReset }: { run: SnapshotRun; onR
           </p>
         </div>
         <div className={styles.flags}>
-          {s.confidence === "high" ? (
+          {!run.timeKnown && s.confidence === "high" ? (
+            <span className={`${styles.flag} ${styles.flagCheck}`} data-sakhi="Without a birth time I read the Moon at local noon. Your Sun is certain; anything the Moon touches is approximate until you add a time.">
+              ◐ Read at local noon
+            </span>
+          ) : s.confidence === "high" ? (
             <span className={`${styles.flag} ${styles.flagOk}`} data-sakhi="Every position sits comfortably away from a sign or nakshatra boundary, so small time differences won't change these results.">
               ✓ High confidence
             </span>
@@ -143,7 +147,11 @@ export default function SnapshotResult({ run, onReset }: { run: SnapshotRun; onR
               ◐ Check birth time
             </span>
           )}
-          {!run.timeKnown && <span className={`${styles.flag} ${styles.flagCheck}`}>Lagna withheld</span>}
+          {!run.timeKnown && (
+            <span className={`${styles.flag} ${styles.flagCheck}`} data-sakhi="The Lagna changes sign roughly every two hours, so without your birth time I leave it out rather than guess.">
+              Lagna withheld
+            </span>
+          )}
         </div>
       </header>
 

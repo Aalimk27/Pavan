@@ -68,7 +68,7 @@ export default function DashaBand({
                 style={{ left: `${x.left}%`, width: `${x.width}%`, ["--tone" as string]: GRAHA_TONE[x.p.lord] }}
                 aria-pressed={i === sel}
                 aria-label={`${x.p.lord} Mahadasha, ${fmtYear(x.p.start)} to ${fmtYear(x.p.end)}${i === currentIdx ? " — you are here" : ""}`}
-                data-sakhi={`${x.p.lord} (${GRAHA_SANSKRIT[x.p.lord]}) — a chapter of ${DASHA_THEME[x.p.lord].theme}.`}
+                data-sakhi={`${x.p.lord}${GRAHA_SANSKRIT[x.p.lord] !== x.p.lord ? ` (${GRAHA_SANSKRIT[x.p.lord]})` : ""} — a chapter of ${DASHA_THEME[x.p.lord].theme}.`}
                 onClick={() => setSel(i)}
               >
                 {x.width > 3.2 && (
@@ -107,7 +107,7 @@ export default function DashaBand({
               {isCurrent ? "Your current chapter" : sel < currentIdx ? "A chapter behind you" : "A chapter ahead"} · age {ageAt(selected.start)}–{ageAt(selected.end)}
             </p>
             <p className={styles.detailTitle}>
-              {selected.lord} <span className={styles.dim}>({GRAHA_SANSKRIT[selected.lord]})</span> Mahadasha
+              {selected.lord} {GRAHA_SANSKRIT[selected.lord] !== selected.lord && <span className={styles.dim}>({GRAHA_SANSKRIT[selected.lord]})</span>} Mahadasha
             </p>
             <p className={styles.detailDates}>
               {fmtDate(selected.start)} – {fmtDate(selected.end)}

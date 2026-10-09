@@ -10,6 +10,7 @@
     grid-template-columns: 1fr;
     max-width: 560px;
     margin: 0 auto;
+    gap: 34px;
   }
 }
 

@@ -1,0 +1,199 @@
+/* Seven-day practice tracker (sits on a forest section). */
+
+.tracker {
+  display: grid;
+  gap: clamp(28px, 4vw, 64px);
+  grid-template-columns: 1fr;
+  align-items: start;
+}
+
+@media (min-width: 900px) {
+  .tracker {
+    grid-template-columns: 260px 1fr;
+  }
+}
+
+.ringBox {
+  position: relative;
+  width: min(240px, 64vw);
+  aspect-ratio: 1;
+  margin: 0 auto;
+}
+
+@media (min-width: 900px) {
+  .ringBox {
+    position: sticky;
+    top: calc(var(--header-h) + 32px);
+  }
+}
+
+.ring {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.track {
+  fill: rgba(255, 253, 247, 0.03);
+  stroke: rgba(236, 196, 97, 0.14);
+  stroke-width: 3;
+}
+
+.fill {
+  fill: none;
+  stroke: var(--gold-400);
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  filter: drop-shadow(0 0 6px rgba(243, 207, 99, 0.6));
+  transition: stroke-dashoffset 0.9s var(--ease-out);
+}
+
+.tick {
+  fill: var(--forest-700);
+  stroke: rgba(236, 196, 97, 0.4);
+  stroke-width: 1;
+}
+
+.tickOn {
+  fill: var(--gold-300);
+}
+
+.ringText {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  text-align: center;
+}
+
+.ringNum {
+  font-family: var(--font-display);
+  font-size: 4rem;
+  line-height: 1;
+  color: var(--gold-200);
+  font-variation-settings: "SOFT" 100, "opsz" 144;
+}
+
+.ringNum small {
+  font-size: 1.6rem;
+  color: rgba(251, 246, 234, 0.55);
+}
+
+.ringLabel {
+  margin-top: 6px;
+  font-family: var(--font-inscription);
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold-400);
+}
+
+.days {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.day {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 16px;
+  align-items: start;
+  width: 100%;
+  padding: 16px 18px;
+  border-radius: var(--radius-m);
+  border: 1px solid rgba(236, 196, 97, 0.18);
+  background: rgba(255, 253, 247, 0.04);
+  color: var(--ivory-100);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.3s, border-color 0.3s, transform 0.35s var(--ease-out);
+}
+
+.day:hover {
+  background: rgba(255, 253, 247, 0.08);
+  border-color: rgba(236, 196, 97, 0.45);
+  transform: translateX(3px);
+}
+
+.day:focus-visible {
+  outline: 2px solid var(--gold-400);
+  outline-offset: 3px;
+}
+
+.check {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(236, 196, 97, 0.5);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--gold-300);
+  transition: background 0.3s, color 0.3s, box-shadow 0.4s, transform 0.4s var(--ease-out);
+}
+
+.dayOn {
+  background: rgba(236, 196, 97, 0.1);
+  border-color: rgba(236, 196, 97, 0.4);
+}
+
+.dayOn .check {
+  background: var(--grad-gold);
+  border-color: transparent;
+  color: var(--forest-900);
+  font-family: var(--font-body);
+  font-weight: 800;
+  box-shadow: 0 0 22px rgba(243, 207, 99, 0.55);
+  animation: pop 0.5s var(--ease-out);
+}
+
+.dayNext {
+  border-color: rgba(236, 196, 97, 0.6);
+  box-shadow: 0 0 0 1px rgba(236, 196, 97, 0.25), 0 12px 30px -16px rgba(243, 207, 99, 0.5);
+}
+
+.dayBody {
+  display: grid;
+  gap: 4px;
+}
+
+.dayKicker {
+  font-family: var(--font-inscription);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold-400);
+}
+
+.dayKicker em {
+  font-style: normal;
+  color: var(--gold-200);
+}
+
+.dayText {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: rgba(251, 246, 234, 0.9);
+}
+
+.dayOn .dayText {
+  color: rgba(251, 246, 234, 0.7);
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0.7);
+  }
+  60% {
+    transform: scale(1.12);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

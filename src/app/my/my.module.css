@@ -1,0 +1,12 @@
+.mala {
+  max-width: 560px;
+}
+
+.body {
+  padding-top: clamp(28px, 4vw, 48px);
+}
+
+.note {
+  max-width: 760px;
+  margin: clamp(32px, 4vw, 48px) auto 0;
+}
