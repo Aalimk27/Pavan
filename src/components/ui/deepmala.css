@@ -1,0 +1,111 @@
+.deepmala__row {
+  display: flex;
+  justify-content: center;
+  gap: clamp(6px, 2vw, 18px);
+}
+
+.deepmala__day {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+}
+
+.deepmala__lamp {
+  width: clamp(40px, 9vw, 58px);
+  height: clamp(40px, 9vw, 58px);
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: default;
+  border-radius: 50%;
+}
+
+.deepmala__day.is-today:not(.is-lit) .deepmala__lamp {
+  cursor: pointer;
+  animation: pm-float 2.8s var(--ease-in-out) infinite;
+}
+
+.deepmala__day.is-today:not(.is-lit) .deepmala__lamp:hover .deepmala__bowl {
+  fill: var(--gold-400);
+}
+
+.deepmala__lamp svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.deepmala__bowl {
+  fill: #8a6420;
+  transition: fill 0.4s;
+}
+
+.deepmala__rim {
+  stroke: #c9952f;
+  stroke-width: 2;
+}
+
+.deepmala__wick {
+  fill: #3a2a12;
+}
+
+.deepmala__day.is-lit .deepmala__bowl {
+  fill: #d4a537;
+}
+
+.deepmala__flame {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: dm-flicker 1.6s ease-in-out infinite;
+}
+
+.deepmala__halo {
+  animation: sk-aura 3s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.deepmala__label {
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.65;
+}
+
+.deepmala__day.is-today .deepmala__label {
+  opacity: 1;
+  font-weight: 700;
+  color: var(--gold-500);
+}
+
+.deepmala__caption {
+  margin: 14px 0 0;
+  text-align: center;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.deepmala--dark {
+  color: var(--ivory-100);
+}
+
+.deepmala--dark .deepmala__bowl {
+  fill: #5c4518;
+}
+
+.deepmala--dark .deepmala__day.is-lit .deepmala__bowl {
+  fill: #d4a537;
+}
+
+@keyframes dm-flicker {
+  0%,
+  100% {
+    transform: scale(1, 1) rotate(0deg);
+  }
+  25% {
+    transform: scale(0.94, 1.06) rotate(-2deg);
+  }
+  60% {
+    transform: scale(1.04, 0.96) rotate(2deg);
+  }
+}

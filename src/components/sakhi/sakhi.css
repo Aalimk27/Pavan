@@ -1,0 +1,916 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   SAKHI — living presence
+   ═══════════════════════════════════════════════════════════════════════ */
+
+:root {
+  --sk-amp: 0;
+}
+
+/* ─────────────── The mark ─────────────── */
+
+.sakhi-mark {
+  overflow: visible;
+  display: block;
+}
+
+.sakhi-mark .sk-body {
+  transform-box: view-box;
+  transform-origin: 120px 200px;
+  animation: sk-breathe 5.2s var(--ease-in-out) infinite;
+}
+
+.sakhi-mark .sk-flame {
+  transform-box: view-box;
+  transform-origin: 120px 208px;
+  animation: sk-flicker 3.4s ease-in-out infinite;
+}
+
+.sakhi-mark .sk-barbs {
+  opacity: 0.42;
+  animation: sk-shimmer 6s ease-in-out infinite;
+}
+
+.sakhi-mark .sk-blink {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 0.11s ease-in;
+}
+
+.sakhi-mark.is-blink .sk-blink {
+  transform: scaleY(0.06);
+}
+
+.sakhi-mark .sk-iris {
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(calc(1 + var(--sk-amp) * 0.075));
+  transition: transform 0.12s ease-out;
+}
+
+.sakhi-mark .sk-bindu {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.sakhi-mark .sk-petal {
+  transform-box: view-box;
+  transform-origin: 120px 229px;
+  transition: transform 0.9s var(--ease-out);
+}
+
+.sakhi-mark .sk-orbit,
+.sakhi-mark .sk-ripples {
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.sakhi-mark .sk-orbit {
+  transform-box: view-box;
+  transform-origin: 120px 148px;
+}
+
+.sakhi-mark .sk-ripples ellipse {
+  transform-box: view-box;
+  transform-origin: 120px 148px;
+}
+
+/* moods */
+.sakhi-mark.mood-attentive .sk-iris {
+  transform: scale(calc(1.05 + var(--sk-amp) * 0.075));
+}
+
+.sakhi-mark.mood-thinking .sk-orbit {
+  opacity: 0.9;
+  animation: pm-spin 2.6s linear infinite;
+}
+
+.sakhi-mark.mood-thinking .sk-bindu {
+  animation: sk-bindu-think 1.3s ease-in-out infinite;
+}
+
+.sakhi-mark.mood-listening .sk-ripples {
+  opacity: 1;
+}
+
+.sakhi-mark.mood-listening .sk-ripples ellipse {
+  animation: sk-ripple 1.8s var(--ease-out) infinite;
+}
+
+.sakhi-mark.mood-listening .sk-ripples ellipse:nth-child(2) {
+  animation-delay: 0.6s;
+}
+
+.sakhi-mark.mood-listening .sk-ripples ellipse:nth-child(3) {
+  animation-delay: 1.2s;
+}
+
+.sakhi-mark.mood-joy .sk-petal-0 {
+  transform: rotate(-9deg);
+}
+
+.sakhi-mark.mood-joy .sk-petal-1 {
+  transform: rotate(9deg);
+}
+
+.sakhi-mark.mood-joy .sk-petal-2 {
+  transform: rotate(-5deg);
+}
+
+.sakhi-mark.mood-joy .sk-petal-3 {
+  transform: rotate(5deg);
+}
+
+.sakhi-mark.mood-joy .sk-body {
+  animation: sk-joy 1.1s var(--ease-out) 1, sk-breathe 5.2s var(--ease-in-out) 1.1s infinite;
+}
+
+.sakhi-mark.mood-resting .sk-blink {
+  transform: scaleY(0.38);
+  transition: transform 1.4s var(--ease-in-out);
+}
+
+.sakhi-mark.mood-resting .sk-body {
+  animation-duration: 8s;
+}
+
+@keyframes sk-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.028);
+  }
+}
+
+@keyframes sk-flicker {
+  0%,
+  100% {
+    transform: scaleY(1) skewX(0deg);
+  }
+  30% {
+    transform: scaleY(1.012) skewX(0.6deg);
+  }
+  60% {
+    transform: scaleY(0.995) skewX(-0.5deg);
+  }
+}
+
+@keyframes sk-shimmer {
+  0%,
+  100% {
+    opacity: 0.32;
+  }
+  50% {
+    opacity: 0.58;
+  }
+}
+
+@keyframes sk-ripple {
+  from {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  to {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+@keyframes sk-bindu-think {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.7);
+  }
+}
+
+@keyframes sk-joy {
+  0% {
+    transform: scale(1);
+  }
+  35% {
+    transform: scale(1.09) translateY(-4px);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* ─────────────── Aura (behind any mark) ─────────────── */
+
+.sakhi-aura {
+  position: absolute;
+  inset: -30%;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 58%, rgba(243, 207, 99, calc(0.32 + var(--sk-amp) * 0.35)) 0%, rgba(243, 207, 99, 0.08) 38%, transparent 66%);
+  animation: sk-aura 5.2s var(--ease-in-out) infinite;
+  transition: background 0.2s;
+}
+
+@keyframes sk-aura {
+  0%,
+  100% {
+    transform: scale(0.94);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.06);
+    opacity: 1;
+  }
+}
+
+/* ─────────────── Floating orb ─────────────── */
+
+.sakhi-orb {
+  position: fixed;
+  right: max(18px, env(safe-area-inset-right));
+  bottom: max(18px, env(safe-area-inset-bottom));
+  z-index: 90;
+  width: 76px;
+  height: 76px;
+  transition: transform 1s var(--ease-out), opacity 0.6s var(--ease-out);
+  will-change: transform;
+}
+
+.sakhi-orb.is-hidden {
+  opacity: 0;
+  transform: translateY(40px) scale(0.6);
+  pointer-events: none;
+}
+
+.sakhi-orb__btn {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  background: radial-gradient(circle at 50% 35%, #145238, #062a1c 70%);
+  box-shadow: 0 0 0 1.5px rgba(236, 196, 97, 0.65), 0 14px 34px -8px rgba(3, 20, 12, 0.7), inset 0 2px 8px rgba(255, 255, 255, 0.08);
+  display: grid;
+  place-items: center;
+  transition: transform 0.4s var(--ease-out), box-shadow 0.4s;
+}
+
+.sakhi-orb__btn:hover {
+  transform: scale(1.06);
+  box-shadow: 0 0 0 2px rgba(236, 196, 97, 0.9), 0 18px 40px -8px rgba(3, 20, 12, 0.75), 0 0 40px rgba(243, 207, 99, 0.35);
+}
+
+.sakhi-orb__btn .sakhi-mark {
+  width: 68px;
+  height: 68px;
+  margin-top: -14px;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.35));
+}
+
+.sakhi-orb__tag {
+  position: absolute;
+  right: 88px;
+  bottom: 22px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--forest-900);
+  color: var(--gold-300);
+  font-family: var(--font-inscription);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(8px);
+  transition: all 0.35s var(--ease-out);
+  pointer-events: none;
+}
+
+.sakhi-orb:hover .sakhi-orb__tag {
+  opacity: 1;
+  transform: none;
+}
+
+.sakhi-orb.is-flying .sakhi-orb__btn {
+  box-shadow: 0 0 0 2px rgba(236, 196, 97, 0.9), 0 0 60px rgba(243, 207, 99, 0.6);
+}
+
+.sakhi-orb.is-panel-open {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.7);
+}
+
+/* Celebration sparks */
+.sakhi-spark {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff6d0, #f3cf63 60%, transparent 70%);
+  pointer-events: none;
+  animation: sk-spark 1.2s var(--ease-out) forwards;
+}
+
+@keyframes sk-spark {
+  from {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(0.2);
+    opacity: 0;
+  }
+}
+
+/* ─────────────── Whisper bubble ─────────────── */
+
+.sakhi-whisper {
+  position: fixed;
+  z-index: 91;
+  right: max(18px, env(safe-area-inset-right));
+  bottom: calc(max(18px, env(safe-area-inset-bottom)) + 92px);
+  width: min(320px, calc(100vw - 36px));
+  padding: 14px 16px 14px;
+  border-radius: 18px 18px 6px 18px;
+  background: var(--ivory-50);
+  color: var(--ink);
+  box-shadow: 0 0 0 1px var(--line-gold), 0 22px 48px -18px rgba(6, 42, 28, 0.55);
+  animation: sk-whisper-in 0.5s var(--ease-out);
+  transition: transform 1s var(--ease-out), opacity 0.3s;
+}
+
+.sakhi-whisper.is-leaving {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.sakhi-whisper__who {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-inscription);
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  color: var(--gold-600);
+  margin-bottom: 4px;
+}
+
+.sakhi-whisper__text {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.sakhi-whisper__actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.sakhi-whisper__close {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  border: 0;
+  background: none;
+  color: var(--ink-mute);
+  font-size: 1.1rem;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.sakhi-whisper__close:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+@keyframes sk-whisper-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.sk-caret::after {
+  content: "";
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 2px;
+  vertical-align: -2px;
+  background: var(--gold-500);
+  animation: sk-caret 0.9s steps(1) infinite;
+}
+
+@keyframes sk-caret {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ─────────────── Spotlight guide ─────────────── */
+
+.sakhi-spotlight {
+  position: fixed;
+  z-index: 88;
+  border-radius: 20px;
+  pointer-events: none;
+  box-shadow: 0 0 0 9999px rgba(3, 20, 12, 0.62), 0 0 0 2px rgba(243, 207, 99, 0.9), 0 0 50px rgba(243, 207, 99, 0.45);
+  transition: all 0.75s var(--ease-out);
+}
+
+.sakhi-guide-catcher {
+  position: fixed;
+  inset: 0;
+  z-index: 87;
+  background: transparent;
+}
+
+.sakhi-guide-card {
+  position: fixed;
+  z-index: 92;
+  width: min(340px, calc(100vw - 32px));
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: var(--ivory-50);
+  box-shadow: 0 0 0 1px var(--line-gold), 0 30px 60px -20px rgba(0, 0, 0, 0.55);
+  animation: sk-whisper-in 0.5s var(--ease-out);
+  transition: top 0.75s var(--ease-out), left 0.75s var(--ease-out);
+}
+
+.sakhi-guide-card__step {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-600);
+  font-family: var(--font-inscription);
+}
+
+/* ─────────────── Conversation panel ─────────────── */
+
+.sakhi-panel {
+  position: fixed;
+  z-index: 95;
+  top: 14px;
+  right: 14px;
+  bottom: 14px;
+  width: min(460px, calc(100vw - 28px));
+  display: flex;
+  flex-direction: column;
+  border-radius: 28px;
+  overflow: hidden;
+  background: var(--ivory-100);
+  box-shadow: 0 0 0 1px rgba(236, 196, 97, 0.35), 0 40px 90px -30px rgba(3, 20, 12, 0.75);
+  transform: translateX(calc(100% + 30px));
+  visibility: hidden;
+  transition: transform 0.6s var(--ease-out), visibility 0s 0.6s;
+}
+
+.sakhi-panel.is-open {
+  transform: none;
+  visibility: visible;
+  transition: transform 0.6s var(--ease-out), visibility 0s;
+}
+
+.sakhi-panel__head {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 16px 18px 18px;
+  background: var(--grad-forest);
+  color: var(--ivory-100);
+  overflow: hidden;
+}
+
+.sakhi-panel__head::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(243, 207, 99, 0.7), transparent);
+}
+
+.sakhi-panel__avatar {
+  position: relative;
+  width: 74px;
+  height: 74px;
+  flex: none;
+}
+
+.sakhi-panel__avatar .sakhi-mark {
+  position: relative;
+  width: 74px;
+  height: 74px;
+}
+
+.sakhi-panel__name {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  line-height: 1;
+  margin: 0 0 4px;
+}
+
+.sakhi-panel__status {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.82rem;
+  color: rgba(251, 246, 234, 0.72);
+}
+
+.sakhi-panel__status i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--gold-400);
+  box-shadow: 0 0 10px var(--gold-400);
+  animation: sk-aura 2.4s infinite;
+}
+
+.sakhi-panel__tools {
+  margin-left: auto;
+  display: flex;
+  gap: 4px;
+  align-self: flex-start;
+}
+
+.sk-icon-btn {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--ivory-100);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.sk-icon-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.sk-icon-btn[aria-pressed="true"] {
+  background: rgba(243, 207, 99, 0.22);
+  color: var(--gold-300);
+}
+
+.sk-icon-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.sakhi-panel__log {
+  flex: 1;
+  overflow-y: auto;
+  padding: 18px 16px 8px;
+  scroll-behavior: smooth;
+  overscroll-behavior: contain;
+}
+
+.sk-msg {
+  display: flex;
+  margin-bottom: 14px;
+  animation: pm-fade-up 0.45s var(--ease-out);
+}
+
+.sk-msg--you {
+  justify-content: flex-end;
+}
+
+.sk-bubble {
+  max-width: 88%;
+  padding: 11px 15px;
+  border-radius: 18px;
+  font-size: 0.96rem;
+  line-height: 1.55;
+}
+
+.sk-msg--sakhi .sk-bubble {
+  background: var(--ivory-50);
+  border: 1px solid var(--line-gold);
+  border-top-left-radius: 6px;
+  box-shadow: 0 6px 16px -12px rgba(6, 42, 28, 0.4);
+}
+
+.sk-msg--you .sk-bubble {
+  background: var(--forest-800);
+  color: var(--ivory-100);
+  border-top-right-radius: 6px;
+}
+
+.sk-msg__body {
+  max-width: 100%;
+  min-width: 0;
+}
+
+.sk-cards {
+  display: grid;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.sk-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 2px 0 14px;
+}
+
+.sk-chip {
+  padding: 8px 13px;
+  border-radius: 999px;
+  border: 1px solid var(--line-gold);
+  background: rgba(255, 253, 247, 0.8);
+  color: var(--forest-800);
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s var(--ease-out);
+}
+
+.sk-chip:hover {
+  background: var(--forest-800);
+  color: var(--ivory-100);
+  border-color: var(--forest-800);
+  transform: translateY(-1px);
+}
+
+.sk-typing {
+  display: inline-flex;
+  gap: 5px;
+  padding: 14px 16px;
+}
+
+.sk-typing span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--gold-500);
+  animation: sk-dot 1.2s infinite;
+}
+
+.sk-typing span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.sk-typing span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes sk-dot {
+  0%,
+  80%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  40% {
+    transform: translateY(-5px);
+    opacity: 1;
+  }
+}
+
+.sakhi-panel__composer {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 12px 14px calc(12px + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--line);
+  background: var(--ivory-50);
+}
+
+.sakhi-panel__input {
+  flex: 1;
+  min-width: 0;
+  height: 48px;
+  padding: 0 16px;
+  border-radius: 999px;
+  border: 1.5px solid var(--line);
+  background: var(--ivory-100);
+  font: inherit;
+  font-size: 0.98rem;
+  color: var(--ink);
+}
+
+.sakhi-panel__input:focus {
+  outline: none;
+  border-color: var(--gold-500);
+  box-shadow: 0 0 0 4px rgba(212, 165, 55, 0.16);
+}
+
+.sk-round {
+  width: 48px;
+  height: 48px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.25s var(--ease-out), background 0.25s;
+}
+
+.sk-round svg {
+  width: 20px;
+  height: 20px;
+}
+
+.sk-round--send {
+  background: var(--grad-gold);
+  color: var(--forest-900);
+}
+
+.sk-round--mic {
+  background: var(--ivory-200);
+  color: var(--forest-800);
+}
+
+.sk-round--mic.is-live {
+  background: var(--forest-800);
+  color: var(--gold-300);
+  box-shadow: 0 0 0 0 rgba(243, 207, 99, 0.6);
+  animation: sk-mic 1.4s infinite;
+}
+
+@keyframes sk-mic {
+  0% {
+    box-shadow: 0 0 0 0 rgba(243, 207, 99, 0.55);
+  }
+  100% {
+    box-shadow: 0 0 0 16px rgba(243, 207, 99, 0);
+  }
+}
+
+.sk-round:hover {
+  transform: scale(1.06);
+}
+
+.sakhi-panel__foot {
+  padding: 0 16px 10px;
+  font-size: 0.72rem;
+  color: var(--ink-mute);
+  text-align: center;
+  background: var(--ivory-50);
+}
+
+.sakhi-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 94;
+  background: rgba(3, 20, 12, 0.35);
+  backdrop-filter: blur(2px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s;
+}
+
+.sakhi-scrim.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ─────────────── Cards inside conversation ─────────────── */
+
+.sk-card {
+  border-radius: 16px;
+  border: 1px solid var(--line-gold);
+  background: linear-gradient(180deg, #fffdf7, #fbf3df);
+  padding: 14px 14px 12px;
+  font-size: 0.9rem;
+}
+
+.sk-card--dark {
+  background: var(--grad-forest);
+  color: var(--ivory-100);
+  border-color: rgba(236, 196, 97, 0.35);
+}
+
+.sk-card__kicker {
+  font-family: var(--font-inscription);
+  font-size: 0.66rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold-600);
+  margin-bottom: 6px;
+}
+
+.sk-card--dark .sk-card__kicker {
+  color: var(--gold-400);
+}
+
+.sk-card__title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  line-height: 1.2;
+  margin: 0 0 4px;
+}
+
+.sk-card__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 10px 0 6px;
+}
+
+.sk-stat {
+  padding: 9px 10px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(236, 196, 97, 0.2);
+}
+
+.sk-card:not(.sk-card--dark) .sk-stat {
+  background: rgba(212, 165, 55, 0.07);
+}
+
+.sk-stat__label {
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.sk-stat__value {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  line-height: 1.25;
+}
+
+.sk-num {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+}
+
+.sk-num + .sk-num {
+  border-top: 1px dashed var(--line-gold);
+}
+
+.sk-num__digit {
+  width: 52px;
+  height: 52px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--grad-gold);
+  color: var(--forest-900);
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 6px 14px -8px rgba(138, 100, 32, 0.9);
+}
+
+.sk-card .sanskrit {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--forest-800);
+  margin: 4px 0 8px;
+  white-space: pre-line;
+}
+
+.sk-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.sk-card a.link-arrow {
+  font-size: 0.86rem;
+}
+
+@media (max-width: 640px) {
+  .sakhi-panel {
+    inset: 0;
+    width: 100%;
+    border-radius: 0;
+  }
+  .sakhi-orb {
+    width: 64px;
+    height: 64px;
+  }
+  .sakhi-orb__btn .sakhi-mark {
+    width: 58px;
+    height: 58px;
+  }
+  .sakhi-whisper {
+    bottom: calc(max(18px, env(safe-area-inset-bottom)) + 78px);
+  }
+}
